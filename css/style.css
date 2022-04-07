@@ -43,3 +43,12 @@ h1 {
     left: 10px;
 }
 
+
+.back-face {
+    opacity: 0;
+}
+
+.front-face {
+    opacity: 1;
+}
+
