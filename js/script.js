@@ -43,7 +43,7 @@ function setUpGame() {
 
         for (let i = 0; i < cardsQuantity; i++) {
             addCard.innerHTML += `
-            <li class="card" onclick="select(this)">
+            <li class="card" onclick="flipCard(this)">
                 <img src=${gameArray[i]} class="back-face">
                 <img src="./images/front.png" class="front-face">
             </li>`
@@ -54,11 +54,12 @@ function setUpGame() {
     }
 }
 
-function select(card) {
-    const back = card.firstElementChild;
-    const front = card.lastElementChild;
-    back.style.opacity = "1";
-    front.style.opacity = "0";
+function flipCard(card) {
+   card.classList.toggle("flip");
+
+   
+
+
 }
 
 setUpGame();

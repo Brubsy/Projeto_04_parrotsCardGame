@@ -31,24 +31,32 @@ h1 {
     position: relative;
     margin-right: 34px;
     margin-bottom: 34px;
-
+    transition: all .5s;
+    transform-style: preserve-3d;
 }
 
 .card img {
     width: 100px;
     height: 100px;
-
+    
     position: absolute;
     top: 24px;
     left: 10px;
 }
 
+.front-face,
+.back-face {
+    backface-visibility: hidden;
+}
+
 
 .back-face {
-    opacity: 0;
+    transform: rotateY(180deg);
 }
 
-.front-face {
-    opacity: 1;
-}
+.card.flip {
+    transform: rotateY(180deg);
+  }
+
+
 
