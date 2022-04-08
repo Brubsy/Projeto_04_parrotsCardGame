@@ -73,6 +73,10 @@ span {
     transform-style: preserve-3d;
 }
 
+.card:active {
+    transform: scale(.95);
+}
+
 .card img {
     width: 100px;
     height: 100px;
