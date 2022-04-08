@@ -119,8 +119,19 @@ function resetRound() {
 }
 
 function congratulationsMessage() {
-    let timePassed = timer.innerText.substring(6);
-    alert(`Parabéns! Você ganhou em ${timePassed} segundos com ${roundsTaken} jogadas!`);
+    let timePassed = timer.innerText;
+
+    if (timePassed.substring(0,1) !== "0") {
+        alert(`Parabéns! Você ganhou em ${timePassed.substring(0,2)} minutos e ${timePassed.substring(3)} segundos com ${roundsTaken} jogadas!`);
+    }
+
+    if (timePassed.substring(1,2) !== "0") {
+        alert(`Parabéns! Você ganhou em ${timePassed.substring(1,2)} minutos e ${timePassed.substring(3)} segundos com ${roundsTaken} jogadas!`);
+    }
+
+    if (timePassed.substring(1,2) === "0") {
+        alert(`Parabéns! Você ganhou em ${timePassed.substring(3)} segundos com ${roundsTaken} jogadas!`);
+    }
 }
 
 function congratsPlayer() {
@@ -152,19 +163,43 @@ function eraseBoard() {
 function incrementSeconds() {
     seconds++;
 
-    if (seconds >= 10) {
-        timer.innerText = `00:0${minutes}:${seconds}`;
+    if (minutes > 9) {
+        writeMinutesTwoDigits();
+    } else {
+        writeMinuteOneDigit();
+    }
+}
+
+function writeMinutesTwoDigits() {
+    if (seconds < 10) {
+        timer.innerText = `${minutes}:0${seconds}`;
     }
 
-    if (seconds < 10) {
-        timer.innerText = `00:0${minutes}:0${seconds}`;
+    if (seconds >= 10) {
+        timer.innerText = `${minutes}:${seconds}`;
     }
 
     if (seconds > 59) {
         minutes++;
         seconds = 0;
-        timer.innerText = `00:0${minutes}:0${seconds}`
+        timer.innerText = `${minutes}:0${seconds}`
     }
+}
+
+function writeMinuteOneDigit() {
+    if (seconds >= 10) {
+        timer.innerText = `0${minutes}:${seconds}`;
+    }
+
+    if (seconds < 10) {
+        timer.innerText = `0${minutes}:0${seconds}`;
+    }
+
+    if (seconds > 59) {
+        minutes++;
+        seconds = 0;
+        timer.innerText = `0${minutes}:0${seconds}`
+    }    
 }
 
 setUpGame();

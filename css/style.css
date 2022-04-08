@@ -22,6 +22,15 @@ h2 {
     margin-bottom: 10px;
 }
 
+h3 {
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-style: italic;
+    font-size: 15px;
+    color: #75B79E;
+    margin-top: 10px;
+}
+
 span {
     font-family: 'Roboto';
     color: #EEF9BF;
