@@ -14,6 +14,43 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 20px;
+    color: #75B79E;
+    margin-bottom: 10px;
+}
+
+span {
+    font-family: 'Roboto';
+    color: #EEF9BF;
+    font-size: 20px;
+}
+
+.clock {
+    width: 180px;
+    height: 80px;
+    text-align: center;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+.time {
+    width: 180px;
+    height: 40px;
+    padding: 10px;
+    border: 3px solid #75B79E;
+    border-radius: 10px; 
+    box-sizing: border-box;
+    background-color: black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .cards {
     display: flex;
     flex-wrap: wrap;

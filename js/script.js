@@ -19,6 +19,11 @@ let allPaired = [];
 let firstCard;
 let secondCard;
 let roundsTaken = 0;
+let seconds = 0;
+let minutes = 0;
+let idInterval = setInterval(incrementSeconds, 1000);
+const gameBoard = document.querySelector(".cards");
+const timer = document.querySelector("span");
 
 //Shuffle cards
 function comparator() {                 
@@ -26,8 +31,10 @@ function comparator() {
 }
 
 function setUpGame() {
+    seconds = 0;
+    minutes = 0;
+    roundsTaken = 0;
     const cardsQuantity = prompt("Com quantas cartas você quer jogar? (mín. 4 e máx. 14)");
-    const addCard = document.querySelector(".cards");
     const gameArray = [];
     
     if (4 <= cardsQuantity && cardsQuantity<= 14 && cardsQuantity % 2 === 0) {
@@ -39,7 +46,7 @@ function setUpGame() {
 
         for (let i = 0; i < cardsQuantity; i++) {
             const memoryCard = gameArray[i];
-            addCard.innerHTML += `
+            gameBoard.innerHTML += `
             <li class="card" title=${memoryCard.name} onclick="flipCard(this)">
                 <img src=${memoryCard.src} class="back-face">
                 <img src="./images/front.png" class="front-face">
@@ -100,7 +107,8 @@ function resetRound() {
 }
 
 function congratulationsMessage() {
-    alert(`Parabéns! Você ganhou em ${roundsTaken} jogadas!`);
+    let timePassed = timer.innerText.substring(6);
+    alert(`Parabéns! Você ganhou em ${timePassed} segundos com ${roundsTaken} jogadas!`);
 }
 
 function congratsPlayer() {
@@ -108,7 +116,43 @@ function congratsPlayer() {
 
     if (allPaired.length === allCards.length) {
         setTimeout(congratulationsMessage, 300);
+        setTimeout(askRestartGame, 600);
         }
+}
+
+function askRestartGame() {
+    let getRestartGame = prompt("Você quer reiniciar a partida?");
+
+    if (getRestartGame === 'sim') {
+        eraseBoard();
+        setUpGame();
+    } else {
+        clearInterval(idInterval);
+    }
+}
+
+function eraseBoard() {
+    while (gameBoard.firstChild) {
+        gameBoard.removeChild(gameBoard.firstChild);
+    }
+}
+
+function incrementSeconds() {
+    seconds++;
+
+    if (seconds >= 10) {
+        timer.innerText = `00:0${minutes}:${seconds}`;
+    }
+
+    if (seconds < 10) {
+        timer.innerText = `00:0${minutes}:0${seconds}`;
+    }
+
+    if (seconds > 59) {
+        minutes++;
+        seconds = 0;
+        timer.innerText = `00:0${minutes}:0${seconds}`
+    }
 }
 
 setUpGame();
