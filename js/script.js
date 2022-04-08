@@ -21,6 +21,7 @@ let secondCard;
 let roundsTaken = 0;
 let seconds = 0;
 let minutes = 0;
+let lockBoard = false;
 let idInterval = setInterval(incrementSeconds, 1000);
 const gameBoard = document.querySelector(".cards");
 const timer = document.querySelector("span");
@@ -59,10 +60,14 @@ function setUpGame() {
 }
 
 function flipCard(card) {
+    if (lockBoard) {
+        return;
+    }
+
     let flippedCard = document.querySelector(".flip");
     card.classList.add("flip");
 
-    if (flippedCard === null) {
+   if (flippedCard === null) {
         firstCard = card;
         roundsTaken++;
     } else {
@@ -81,6 +86,7 @@ function matchCards() {
     if (firstCard.title === secondCard.title) {
         setMatchedPair();
     } else {
+        lockBoard = true;
         setTimeout(unflipCards, 1000);        
     }
 }
@@ -99,6 +105,7 @@ function unflipCards() {
     firstCard.classList.remove("flip");
     secondCard.classList.remove("flip");
 
+    lockBoard = false;
     resetRound();
 }
 
