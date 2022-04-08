@@ -4,6 +4,7 @@ body {
 
 .header {
     margin: 40px 11px 47px 12px;
+    position: relative;
 }
 
 h1 {
@@ -45,6 +46,9 @@ span {
     display: flex;
     flex-direction: column;
     margin: 10px auto;
+    position: absolute;
+    top: 30px;
+    left: 75vw;
 }
 
 .time {
@@ -76,8 +80,7 @@ span {
     box-sizing: border-box;
     border-radius: 5px;
     position: relative;
-    margin-right: 34px;
-    margin-bottom: 34px;
+    margin: 0 17px 34px 17px;
     transition: all .5s;
     transform-style: preserve-3d;
     transform: scale(1);
@@ -113,6 +116,51 @@ span {
 .right-pair {
     transform: rotateY(180deg);
   }
+
+@media (min-width: 912px) and (max-width: 1024px) {
+
+    .time {
+        width: 120px;
+    }
+
+    .clock {
+        width: 120px;
+        top: 160px;
+        left: 78vw;
+    }
+  }
+
+@media (max-width: 820px) {
+    .time {
+        width: 120px;
+    }
+
+    .clock {
+        width: 120px;
+        top: 160px;
+        left: 74vw;
+    }
+}
+
+@media (max-width: 540px) {
+    .time {
+        width: 100px;
+    }
+
+    .clock {
+        width: 100px;
+        top: 200px;
+        left: 71vw;
+    }
+
+    .cards {
+        padding: 0 30vw;
+    }
+}
+
+
+
+
 
 
 
