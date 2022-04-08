@@ -1,31 +1,24 @@
-const cardsArray = [
-    './images/bobrossparrot.gif',
-    './images/bobrossparrot.gif',
-    './images/explodyparrot.gif',
-    './images/explodyparrot.gif',
-    './images/fiestaparrot.gif',
-    './images/fiestaparrot.gif',
-    './images/metalparrot.gif',
-    './images/metalparrot.gif',
-    './images/revertitparrot.gif',
-    './images/revertitparrot.gif',
-    './images/tripletsparrot.gif',
-    './images/tripletsparrot.gif',
-    './images/unicornparrot.gif',
-    './images/unicornparrot.gif'
+//Global variables definition
+const cardsArray = [{src: './images/bobrossparrot.gif', name: 'Bob-Ross-Parrot'},
+    {src: './images/bobrossparrot.gif', name: 'Bob-Ross-Parrot'},
+    {src: './images/explodyparrot.gif', name: 'Explody-Parrot'},
+    {src: './images/explodyparrot.gif', name: 'Explody-Parrot'},
+    {src: './images/fiestaparrot.gif', name: 'Fiesta-Parrot'},
+    {src: './images/fiestaparrot.gif',name: 'Fiesta-Parrot'},
+    {src: './images/metalparrot.gif', name: 'Metal-Parrot'},
+    {src: './images/metalparrot.gif', name: 'Metal-Parrot'},
+    {src: './images/revertitparrot.gif', name: 'Revertit-Parrot'},    
+    {src: './images/revertitparrot.gif', name: 'Revertit-Parrot'},
+    {src: './images/tripletsparrot.gif', name: 'Triplets-Parrot'},
+    {src: './images/tripletsparrot.gif', name: 'Triplets-Parrot'},
+    {src: './images/unicornparrot.gif', name: 'Unicorn-Parrot'},
+    {src: './images/unicornparrot.gif', name: 'Unicorn-Parrot'}
 ];
 
-/*function setMemoryGame() {
-    for (let i = 0; i < cardsQuantity; i++) {
-        addCard.innerHTML += `
-        <li class="card">
-            <img src=${cardsArray[i]} class="back-face">
-            <img src="./images/front.png" class="front-face">
-        </li>`
-    }
-}*/
+let firstCard;
+let secondCard;
 
-function comparator() { 
+function comparator() {                 //Shuffle cards
 	return Math.random() - 0.5; 
 }
 
@@ -42,9 +35,10 @@ function setUpGame() {
         gameArray.sort(comparator);
 
         for (let i = 0; i < cardsQuantity; i++) {
+            const memoryCard = gameArray[i];
             addCard.innerHTML += `
-            <li class="card" onclick="flipCard(this)">
-                <img src=${gameArray[i]} class="back-face">
+            <li class="card" title=${memoryCard.name} onclick="flipCard(this)">
+                <img src=${memoryCard.src} class="back-face">
                 <img src="./images/front.png" class="front-face">
             </li>`
         }
@@ -54,12 +48,38 @@ function setUpGame() {
     }
 }
 
+function unflipCard () {
+    firstCard.classList.remove("flip");
+    secondCard.classList.remove("flip");
+
+    firstCard = null;
+    secondCard = null;
+}
+
 function flipCard(card) {
-   card.classList.toggle("flip");
+    let flippedCard = document.querySelector(".flip");
 
-   
+    card.classList.add("flip");
 
+    if (flippedCard === null) {
+        firstCard = card;
+    } else {
+        secondCard = card;
+    }
 
+    if (firstCard.title === secondCard.title) {
+        firstCard.classList.add("right-pair");
+        firstCard.classList.remove("flip");
+        secondCard.classList.add("right-pair");
+        secondCard.classList.remove("flip");
+
+        firstCard = null;
+        secondCard = null;
+
+    } else {
+        setTimeout(unflipCard, 1000);        
+    }
+    console.log(firstCard, secondCard);
 }
 
 setUpGame();

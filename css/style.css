@@ -49,12 +49,15 @@ h1 {
     backface-visibility: hidden;
 }
 
-
 .back-face {
     transform: rotateY(180deg);
 }
 
-.card.flip {
+.flip {
+    transform: rotateY(180deg);
+  }
+
+.right-pair {
     transform: rotateY(180deg);
   }
 
