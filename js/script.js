@@ -15,10 +15,13 @@ const cardsArray = [{src: './images/bobrossparrot.gif', name: 'Bob-Ross-Parrot'}
     {src: './images/unicornparrot.gif', name: 'Unicorn-Parrot'}
 ];
 
+let allPaired = [];
 let firstCard;
 let secondCard;
+let roundsTaken = 0;
 
-function comparator() {                 //Shuffle cards
+//Shuffle cards
+function comparator() {                 
 	return Math.random() - 0.5; 
 }
 
@@ -48,38 +51,64 @@ function setUpGame() {
     }
 }
 
-function unflipCard () {
-    firstCard.classList.remove("flip");
-    secondCard.classList.remove("flip");
-
-    firstCard = null;
-    secondCard = null;
-}
-
 function flipCard(card) {
     let flippedCard = document.querySelector(".flip");
-
     card.classList.add("flip");
 
     if (flippedCard === null) {
         firstCard = card;
     } else {
         secondCard = card;
+        roundsTaken++;
     }
 
+    if (secondCard !== undefined) {
+        matchCards(); 
+    }
+                  
+    congratsPlayer();
+}
+
+function matchCards() {
     if (firstCard.title === secondCard.title) {
-        firstCard.classList.add("right-pair");
-        firstCard.classList.remove("flip");
-        secondCard.classList.add("right-pair");
-        secondCard.classList.remove("flip");
-
-        firstCard = null;
-        secondCard = null;
-
+        setMatchedPair();
     } else {
-        setTimeout(unflipCard, 1000);        
+        setTimeout(unflipCards, 1000);        
     }
-    console.log(firstCard, secondCard);
+}
+
+function setMatchedPair() {
+    firstCard.classList.add("right-pair");
+    firstCard.classList.remove("flip");
+    secondCard.classList.add("right-pair");
+    secondCard.classList.remove("flip");
+    allPaired = document.querySelectorAll(".right-pair");
+
+    resetRound();
+}
+
+function unflipCards() {
+    firstCard.classList.remove("flip");
+    secondCard.classList.remove("flip");
+
+    resetRound();
+}
+
+function resetRound() {
+    firstCard = undefined;
+    secondCard = undefined;
+}
+
+function congratulationsMessage() {
+    alert(`Parabéns! Você ganhou em ${roundsTaken} jogadas!`);
+}
+
+function congratsPlayer() {
+    let allCards = document.querySelectorAll("li");
+
+    if (allPaired.length === allCards.length) {
+        setTimeout(congratulationsMessage, 300);
+        }
 }
 
 setUpGame();
