@@ -64,6 +64,7 @@ function flipCard(card) {
 
     if (flippedCard === null) {
         firstCard = card;
+        roundsTaken++;
     } else {
         secondCard = card;
         roundsTaken++;
