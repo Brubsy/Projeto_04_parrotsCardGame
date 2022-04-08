@@ -64,6 +64,10 @@ function flipCard(card) {
         return;
     }
 
+    if (card === firstCard) {
+        return;
+    }
+
     let flippedCard = document.querySelector(".flip");
     card.classList.add("flip");
 
@@ -105,13 +109,13 @@ function unflipCards() {
     firstCard.classList.remove("flip");
     secondCard.classList.remove("flip");
 
-    lockBoard = false;
     resetRound();
 }
 
 function resetRound() {
     firstCard = undefined;
     secondCard = undefined;
+    lockBoard = false;
 }
 
 function congratulationsMessage() {
