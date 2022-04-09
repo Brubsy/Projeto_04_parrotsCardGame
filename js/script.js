@@ -129,7 +129,7 @@ function congratulationsMessage() {
         alert(`Parabéns! Você ganhou em ${timePassed.substring(1,2)} minutos e ${timePassed.substring(3)} segundos com ${roundsTaken} jogadas!`);
     }
 
-    if (timePassed.substring(1,2) === "0") {
+    if (timePassed.substring(0,2) === "00") {
         alert(`Parabéns! Você ganhou em ${timePassed.substring(3)} segundos com ${roundsTaken} jogadas!`);
     }
 }
