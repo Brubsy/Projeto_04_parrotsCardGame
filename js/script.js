@@ -48,7 +48,7 @@ function setUpGame() {
         for (let i = 0; i < cardsQuantity; i++) {
             const memoryCard = gameArray[i];
             gameBoard.innerHTML += `
-            <li class="card" title=${memoryCard.name} onclick="flipCard(this)">
+            <li class="card" data-card-type=${memoryCard.name} onclick="flipCard(this)">
                 <img src=${memoryCard.src} class="back-face">
                 <img src="./images/front.png" class="front-face">
             </li>`
@@ -89,7 +89,7 @@ function flipCard(card) {
 }
 
 function matchCards() {
-    if (firstCard.title === secondCard.title) {
+    if (firstCard.dataset.cardType === secondCard.dataset.cardType) {
         setMatchedPair();
     } else {
         lockBoard = true;
