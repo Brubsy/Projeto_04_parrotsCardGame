@@ -82,6 +82,8 @@ function flipCard(card) {
     if (secondCard !== undefined) {
         matchCards(); 
     }
+
+    console.log(gameBoard);
                   
     congratsPlayer();
 }
@@ -125,7 +127,7 @@ function congratulationsMessage() {
         alert(`Parabéns! Você ganhou em ${timePassed.substring(0,2)} minutos e ${timePassed.substring(3)} segundos com ${roundsTaken} jogadas!`);
     }
 
-    if (timePassed.substring(1,2) !== "0") {
+    if (timePassed.substring(0,1) === "0" && timePassed.substring(1,2) !== "0") {
         alert(`Parabéns! Você ganhou em ${timePassed.substring(1,2)} minutos e ${timePassed.substring(3)} segundos com ${roundsTaken} jogadas!`);
     }
 
@@ -139,7 +141,7 @@ function congratsPlayer() {
 
     if (allPaired.length === allCards.length) {
         setTimeout(congratulationsMessage, 300);
-        setTimeout(askRestartGame, 600);
+        setTimeout(askRestartGame, 800);
         }
 }
 
@@ -155,7 +157,10 @@ function askRestartGame() {
 }
 
 function eraseBoard() {
+    allPaired = [];
+    
     while (gameBoard.firstChild) {
+        gameBoard.firstElementChild.classList.remove("right-pair");
         gameBoard.removeChild(gameBoard.firstChild);
     }
 }
